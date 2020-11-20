@@ -66,8 +66,9 @@ int main(int argc, char** argv) {
                 cout << "Generacion 1: " << endl;
                 printMatrix(tablero, x, y);
                 for (int i = 1; i < n_gen; i++) {
-                    char input;
                     cout << "PRESIONE ENTER PARA CONTINUAR" ;
+                    if(i == 1)
+                        cin.ignore();
                     cin.ignore();
                     cout << "Generacion " << i + 1 << endl;
                     tablero = conway(tablero, x, y);
@@ -86,9 +87,9 @@ int main(int argc, char** argv) {
                 printMatrix(tablero, 20, 20);
                 char continuar;
                 for (int i = 1; i < n_gen2; i++) {
-                    char input;
                     cout << "PRESIONE ENTER PARA CONTINUAR";
-                    cin.ignore();
+                    if(i == 1)
+                        cin.ignore();
                     cin.ignore();
                     cout << "Generacion " << i + 1 << ": " << endl;
                     tablero = conway(tablero, 20, 20);
@@ -125,17 +126,23 @@ void liberarMatriz(int**& matrix, int size) {
 }
 
 void printMatrix(int** matrix, int x, int y) {
-    for(int h = 0; h < y; h++){
+    for(int h = 0; h < y +2; h++){
         cout << "# ";
     }
+    cout << endl;
     for (int i = 0; i < x; i++) {
         for (int j = 0; j < y; j++) {
-            if (j == 0 || j == y - 1) {
+            if (j == 0 ) {
                 if (matrix[i][j] == 0)
                     cout << "# . ";
                 else
                     cout << "# * ";
-            } else{
+            }else if(j == y -1){
+                if (matrix[i][j] == 0)
+                    cout << ". #";
+                else
+                    cout << "* #";
+            }else{
                 if (matrix[i][j] == 0)
                     cout << ". ";
                 else
@@ -144,7 +151,7 @@ void printMatrix(int** matrix, int x, int y) {
         }
         cout << endl;
     }
-    for(int k = 0; k < y; k++){
+    for(int k = 0; k < y + 2; k++){
         cout << "# ";
     }
     cout << endl;
